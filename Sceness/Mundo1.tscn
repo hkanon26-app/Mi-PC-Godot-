@@ -1,0 +1,263 @@
+[gd_scene load_steps=28 format=4 uid="uid://6dlojtkyui14"]
+
+[ext_resource type="Texture2D" uid="uid://bwab3yqafkhjg" path="res://Assets/Rocky Roads/Deco/water_a_8frames.png" id="1_kw6ju"]
+[ext_resource type="Texture2D" uid="uid://joniw5ryvxd3" path="res://Assets/Rocky Roads/Backgrounds/mountains_b.png" id="2_pfro4"]
+[ext_resource type="Texture2D" uid="uid://dag2laqema4aq" path="res://Assets/Rocky Roads/Backgrounds/trees.png" id="3_o5jas"]
+[ext_resource type="Texture2D" uid="uid://3md7q1aik48s" path="res://Assets/Rocky Roads/Tilesets/tileset_forest.png" id="4_kmyxk"]
+[ext_resource type="Texture2D" uid="uid://c07t2ithqaodl" path="res://Assets/Rocky Roads/Deco/clouds.png" id="5_umdfr"]
+[ext_resource type="Texture2D" uid="uid://cpjcqfcfgj2mj" path="res://Assets/Rocky Roads/Deco/sun.png" id="6_xwghm"]
+[ext_resource type="Texture2D" uid="uid://dg87ttke63wmy" path="res://Assets/Rocky Roads/Objects/coin_gold.png" id="7_ko0vn"]
+[ext_resource type="PackedScene" uid="uid://d21up2416ooup" path="res://Sceness/Player.tscn" id="8_6jpyd"]
+[ext_resource type="PackedScene" uid="uid://dehl4k8sasjpa" path="res://Sceness/SpawnerMonedas.tscn" id="9_ko0vn"]
+[ext_resource type="Texture2D" uid="uid://bl3rvjolbuipl" path="res://Assets/Rocky Roads/Objects/crate.png" id="9_qmoac"]
+[ext_resource type="Texture2D" uid="uid://crl42r7iwdgim" path="res://Assets/Rocky Roads/Objects/sign.png" id="10_kvuvy"]
+[ext_resource type="PackedScene" uid="uid://doa1puo55nnhw" path="res://Sceness/canvas_layer.tscn" id="12_kmyxk"]
+[ext_resource type="Script" uid="uid://cswymo4sn68v0" path="res://Scripts/ZonaCaida.gd" id="14_xw1u6"]
+[ext_resource type="Texture2D" uid="uid://bc03ihalwch88" path="res://Assets/Rocky Roads/Enemies/spikes.png" id="15_pfro4"]
+[ext_resource type="PackedScene" uid="uid://un8ydyxnfhy4" path="res://Sceness/Sierra.tscn" id="16_o5jas"]
+[ext_resource type="PackedScene" uid="uid://h5rel6obc81j" path="res://Sceness/Enemigo.tscn" id="17_kmyxk"]
+[ext_resource type="PackedScene" uid="uid://do45wt2dc5fgr" path="res://Sceness/Sol.tscn" id="18_umdfr"]
+[ext_resource type="PackedScene" uid="uid://ctk6l0spxble" path="res://Sceness/Spawner_nubes.tscn" id="19_xwghm"]
+[ext_resource type="AudioStream" uid="uid://biuiypk8tis7f" path="res://Assets/MusicaYSonidosGodot/Musica/POL-king-of-coins-short.ogg" id="20_ko0vn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rpbwf"]
+texture = ExtResource("4_kmyxk")
+2:0/0 = 0
+3:0/0 = 0
+5:0/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0/physics_layer_0/polygon_0/one_way = true
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/one_way = true
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0/physics_layer_0/polygon_0/one_way = true
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0/physics_layer_0/polygon_0/one_way = true
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 6.03312, -8, 8, 8, -8, 8)
+8:1/0 = 0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 3.55339, 5.83772, 5.48238, 3.29958, 6.09153, 2.28432, 4.87323, 0.55839, 6.90374, -5.02551, 6.59916, -6.1423, 3.55339, -8, 0.507627)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 6.03312, -8, 8, 8, -8, 8)
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 2.95995, 8, 5.90372, 5.06264, 6.00077, 1.89243, 8, 0.954301, 8, -6.03312, 6.03312, -8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 6.03312, -8, 8, 8, -8, 8)
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:3/0 = 0
+8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:3/0 = 0
+9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:3/0 = 0
+10:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0/physics_layer_0/polygon_0/one_way = true
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:4/0/physics_layer_0/polygon_0/one_way = true
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:4/0/physics_layer_0/polygon_0/one_way = true
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:4/0/physics_layer_0/polygon_0/one_way = true
+5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:4/0/physics_layer_0/polygon_0/one_way = true
+6:4/0 = 0
+6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 6.03312, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v5kc6"]
+texture = ExtResource("5_umdfr")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6oxk5"]
+texture = ExtResource("6_xwghm")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dldqc"]
+texture = ExtResource("7_ko0vn")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xqokk"]
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_rpbwf")
+sources/5 = SubResource("TileSetAtlasSource_v5kc6")
+sources/6 = SubResource("TileSetAtlasSource_6oxk5")
+sources/8 = SubResource("TileSetAtlasSource_dldqc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fw20"]
+size = Vector2(475, 20)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5jas"]
+texture = ExtResource("15_pfro4")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kmyxk"]
+physics_layer_0/collision_layer = 3
+sources/0 = SubResource("TileSetAtlasSource_o5jas")
+
+[node name="Mundo1" type="Node2D"]
+
+[node name="Sky" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-186, -225.5)
+scale = Vector2(1.125, 4.03125)
+texture = ExtResource("1_kw6ju")
+
+[node name="MountainsB" type="Sprite2D" parent="Sky"]
+texture_filter = 1
+position = Vector2(0.444445, 6.44961)
+scale = Vector2(1.03125, 0.248062)
+texture = ExtResource("2_pfro4")
+
+[node name="Trees" type="Sprite2D" parent="Sky"]
+texture_filter = 1
+position = Vector2(0, 9.92248)
+scale = Vector2(1, 0.248062)
+texture = ExtResource("3_o5jas")
+
+[node name="Water" type="Sprite2D" parent="Sky"]
+texture_filter = 1
+position = Vector2(-0.444445, 33.1163)
+scale = Vector2(1.00348, 0.875969)
+texture = ExtResource("1_kw6ju")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+position = Vector2(-209, -110.5)
+tile_map_data = PackedByteArray("AAAAAP7/AQAIAAMAAAABAP7/AQAJAAMAAAACAP7/AQAKAAMAAAD6/wAAAQABAAMAAAD7//z/AQACAAAAAAD7//3/AQACAAEAAAD8//z/AQADAAAAAAD8//3/AQADAAEAAAD9//3/AQAEAAEAAAD+//z/AQAFAAAAAAD+//3/AQAFAAEAAAD7//7/AQACAAIAAAD6//7/AQABAAIAAAD6////AQABAAMAAAD///7/AQAGAAIAAAD/////AQAGAAMAAAD//wAAAQAGAAMAAAD+//7/AQAFAAIAAAAGAAAAAQAFAAEAAAAGAAEAAQAFAAIAAAADAP//AQACAAAAAAADAAAAAQACAAEAAAAEAP//AQADAAAAAAAEAAAAAQADAAEAAAAFAAAAAQAEAAEAAAAGAP//AQAFAAAAAAADAAEAAQACAAIAAAAEAAEAAQADAAIAAAAFAAEAAQAEAAIAAAD8//7/AQADAAIAAAD9//7/AQAEAAIAAAD7////AQACAAMAAAD8////AQADAAMAAAD9////AQAEAAMAAAD+////AQAFAAMAAAD7/wAAAQACAAMAAAD8/wAAAQADAAMAAAD9/wAAAQAEAAMAAAD7/wEAAQACAAMAAAD8/wEAAQADAAMAAAD9/wEAAQAEAAMAAAD+/wEAAQAFAAMAAAD7/wIAAQACAAQAAAD8/wIAAQADAAQAAAD9/wIAAQAEAAQAAAD+/wIAAQAFAAQAAAD5//v/AQAIAAEAAAD2/wQAAQADAAQAAAD3/wQAAQAEAAQAAAD4/wQAAQAFAAQAAAD5/wQAAQAFAAQAAAD6/wQAAQACAAQAAAD7/wQAAQADAAQAAAD8/wQAAQAEAAQAAAD9/wQAAQAFAAQAAAD+/wQAAQACAAQAAAD//wQAAQADAAQAAAAAAAQAAQAEAAQAAAABAAQAAQAFAAQAAAACAAQAAQACAAQAAAADAAQAAQADAAQAAAAEAAQAAQAEAAQAAAAFAAQAAQACAAQAAAAHAAQAAQAEAAQAAAAIAAQAAQAFAAQAAAAJAAQAAQACAAQAAAAKAAQAAQADAAQAAAAGAAQAAQADAAQAAAALAAQAAQAEAAQAAAAMAAQAAQAFAAQAAAD1/wQAAQACAAQAAAACAAEAAQABAAIAAAAHAAEAAQAGAAIAAAD+/wAAAQAIAAEAAAA=")
+tile_set = SubResource("TileSet_xqokk")
+
+[node name="Player" parent="." instance=ExtResource("8_6jpyd")]
+position = Vector2(-194, -148.5)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+texture_filter = 1
+position = Vector2(8, -17)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+
+[node name="SpawnerMonedas" parent="Player" instance=ExtResource("9_ko0vn")]
+position = Vector2(-120, -19.5)
+
+[node name="Crate" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-297, -151.5)
+texture = ExtResource("9_qmoac")
+hframes = 4
+
+[node name="Sign" type="Sprite2D" parent="Crate"]
+texture_filter = 1
+position = Vector2(209, 41)
+texture = ExtResource("10_kvuvy")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("12_kmyxk")]
+
+[node name="SueloCaida" type="Area2D" parent="."]
+position = Vector2(-209, -121.5)
+collision_layer = 64
+script = ExtResource("14_xw1u6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SueloCaida"]
+light_mask = 8
+position = Vector2(24, 99)
+shape = SubResource("RectangleShape2D_6fw20")
+
+[node name="Spikes" type="Area2D" parent="."]
+position = Vector2(-209, -126)
+collision_layer = 16
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Spikes"]
+light_mask = 8
+texture_filter = 1
+tile_map_data = PackedByteArray("AAACAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAAAAAAAAACAAAAAFAAAAEAAAACAAAAAFAAAAIAAAACAAAAAFA=")
+tile_set = SubResource("TileSet_kmyxk")
+
+[node name="Spikes1" type="CollisionPolygon2D" parent="Spikes"]
+light_mask = 8
+polygon = PackedVector2Array(32, 30, 48, 30, 43, 18, 40, 28, 36, 19)
+
+[node name="Spikes2" type="CollisionPolygon2D" parent="Spikes"]
+light_mask = 8
+position = Vector2(80, 1)
+polygon = PackedVector2Array(32, 30, 48, 30, 43, 18, 40, 28, 36, 19)
+
+[node name="Sierra" parent="." instance=ExtResource("16_o5jas")]
+visibility_layer = 16
+position = Vector2(-170, -204)
+
+[node name="Enemigo" parent="." instance=ExtResource("17_kmyxk")]
+position = Vector2(-121, -118)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_ko0vn")
+volume_db = -8.0
+autoplay = true
+
+[node name="Sol" parent="." instance=ExtResource("18_umdfr")]
+position = Vector2(-88, -231)
+
+[node name="SpawnerNubes" parent="." instance=ExtResource("19_xwghm")]
+position = Vector2(-331, -193)
+
+[connection signal="body_entered" from="SueloCaida" to="SueloCaida" method="_on_body_entered"]
+[connection signal="body_entered" from="Spikes" to="Player" method="_on_spikes_body_entered"]

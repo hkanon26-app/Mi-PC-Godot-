@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dehl4k8sasjpa"]
+
+[ext_resource type="Script" uid="uid://dbal816i8bxig" path="res://Scripts/SpawnerMonedas.gd" id="1_o5ofo"]
+[ext_resource type="PackedScene" uid="uid://n2mrxul4hfwh" path="res://Sceness/Coin.tscn" id="2_jsndr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_in2xd"]
+size = Vector2(288, 106)
+
+[node name="SpawnerMonedas" type="Node2D"]
+script = ExtResource("1_o5ofo")
+coin_scene = ExtResource("2_jsndr")
+
+[node name="ZonaSpawn" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaSpawn"]
+position = Vector2(128, -43)
+shape = SubResource("RectangleShape2D_in2xd")
+
+[node name="TimerMonedas" type="Timer" parent="."]

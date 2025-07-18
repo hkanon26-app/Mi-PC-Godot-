@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cc582tj3pcqoe"
+path="res://.godot/imported/POL-star-way-short (online-audio-converter.com).ogg-915937dea437da8aa82cc3e18f3d3aa6.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/MusicaYSonidosGodot/Musica/POL-star-way-short (online-audio-converter.com).ogg"
+dest_files=["res://.godot/imported/POL-star-way-short (online-audio-converter.com).ogg-915937dea437da8aa82cc3e18f3d3aa6.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

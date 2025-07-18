@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://do45wt2dc5fgr"]
+
+[ext_resource type="Script" uid="uid://dfjw6bqshb0ho" path="res://Scripts/Sol.gd" id="1_7sp7j"]
+[ext_resource type="Texture2D" uid="uid://cpjcqfcfgj2mj" path="res://Assets/Rocky Roads/Deco/sun.png" id="2_mgesl"]
+
+[sub_resource type="Animation" id="Animation_2toia"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ev56n"]
+resource_name = "Sol"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2, 3, 3.96667, 5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6k5q4"]
+_data = {
+&"RESET": SubResource("Animation_2toia"),
+&"Sol": SubResource("Animation_ev56n")
+}
+
+[node name="Sol" type="Node2D"]
+script = ExtResource("1_7sp7j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_mgesl")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6k5q4")
+}

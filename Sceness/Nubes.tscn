@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxyle0mw1mfln"]
+
+[ext_resource type="Script" uid="uid://gemo1vkd1omj" path="res://Scripts/Nubes.gd" id="1_06otq"]
+[ext_resource type="Texture2D" uid="uid://c07t2ithqaodl" path="res://Assets/Rocky Roads/Deco/clouds.png" id="2_a5psu"]
+[ext_resource type="Texture2D" uid="uid://dbj72coiuteq" path="res://Assets/Rocky Roads/Objects/cloud_platforms.png" id="3_2nhbg"]
+
+[sub_resource type="Animation" id="Animation_lo4ya"]
+resource_name = "Nube1"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Nube1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.01, 0.5, 1, 1.5)
+}
+
+[sub_resource type="Animation" id="Animation_epei1"]
+resource_name = "Nube2"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Nube2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5)
+}
+
+[sub_resource type="Animation" id="Animation_mm8co"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Nube1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Nube2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1v5q5"]
+_data = {
+&"Nube1": SubResource("Animation_lo4ya"),
+&"Nube2": SubResource("Animation_epei1"),
+&"RESET": SubResource("Animation_mm8co")
+}
+
+[node name="Nubes" type="Node2D"]
+script = ExtResource("1_06otq")
+
+[node name="Nube1" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_a5psu")
+vframes = 3
+
+[node name="Nube2" type="Sprite2D" parent="."]
+texture = ExtResource("3_2nhbg")
+offset = Vector2(-9.98642, 0.00217345)
+hframes = 2
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1v5q5")
+}
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

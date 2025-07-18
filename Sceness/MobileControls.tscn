@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c213aasudrbdn"]
+
+[ext_resource type="Script" uid="uid://btf4odhsticqd" path="res://Scripts/MobileControls.gd" id="1_jh2of"]
+[ext_resource type="Texture2D" uid="uid://b55ssm786qmwd" path="res://Assets/Rocky Roads/UI/arrow.png" id="2_pmq1g"]
+
+[node name="MobileControls" type="Node"]
+script = ExtResource("1_jh2of")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ControlsContainer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LeftButton" type="TextureButton" parent="CanvasLayer/ControlsContainer"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_pmq1g")

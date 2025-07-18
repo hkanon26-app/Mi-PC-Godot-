@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccg2kpw8yjkoq"]
+
+[ext_resource type="Script" uid="uid://c1rfrwckhe6pv" path="res://Scripts/PauseMenu.gd" id="1_0p71j"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0p71j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.162066, 0.162066, 0.162066, 0.796078)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.005
+anchor_right = 1.0
+anchor_bottom = 0.995
+offset_left = -0.304
+offset_top = -0.24
+offset_right = -2.0
+offset_bottom = 0.239929
+grow_vertical = 2
+text = "
+          GAME IS PAUSE
+
+    PRESS TO P UNPAUSE"
+fit_content = true
+tab_size = 1
+justification_flags = 227

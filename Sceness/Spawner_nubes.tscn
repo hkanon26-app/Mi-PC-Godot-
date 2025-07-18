@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctk6l0spxble"]
+
+[ext_resource type="Script" uid="uid://db7a4gw2n37hv" path="res://Scripts/SpawnerNubes.gd" id="1_3xyy5"]
+[ext_resource type="PackedScene" uid="uid://cxyle0mw1mfln" path="res://Sceness/Nubes.tscn" id="2_phkqg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phkqg"]
+size = Vector2(288.75, 92.625)
+
+[node name="SpawnerNubes" type="Node2D"]
+script = ExtResource("1_3xyy5")
+nube_escena = ExtResource("2_phkqg")
+
+[node name="TimerNubes" type="Timer" parent="."]
+autostart = true
+
+[node name="ZonaSpawn" type="Area2D" parent="."]
+position = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaSpawn"]
+position = Vector2(145.625, -46.6875)
+shape = SubResource("RectangleShape2D_phkqg")

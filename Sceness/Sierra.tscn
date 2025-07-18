@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://un8ydyxnfhy4"]
+
+[ext_resource type="Script" uid="uid://dmwretrmvgxmc" path="res://Scripts/sierra.gd" id="1_6wsqb"]
+[ext_resource type="Texture2D" uid="uid://behca3s3sp7ns" path="res://Assets/Rocky Roads/Enemies/saw.png" id="1_7nsim"]
+
+[sub_resource type="Animation" id="Animation_ce6yc"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_m0i88"]
+resource_name = "RotacionSierra"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 6.28319, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m00sl"]
+_data = {
+&"RESET": SubResource("Animation_ce6yc"),
+&"RotacionSierra": SubResource("Animation_m0i88")
+}
+
+[node name="Sierra" type="Node2D"]
+texture_filter = 1
+position = Vector2(34, 32)
+script = ExtResource("1_6wsqb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -1)
+rotation = 6.28319
+texture = ExtResource("1_7nsim")
+hframes = 2
+vframes = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+texture_filter = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -18, 4, -11, 10, -12, 9, -4, 17, -1, 9, 2, 11, 10, 4, 8, 0, 16, -3, 8, -11, 10, -10, 3, -17, -1, -10, -5, -11, -12, -3, -10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m00sl")
+}
+next/RotacionSierra = &"RotacionSierra"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

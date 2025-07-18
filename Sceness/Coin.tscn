@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://n2mrxul4hfwh"]
+
+[ext_resource type="Texture2D" uid="uid://dg87ttke63wmy" path="res://Assets/Rocky Roads/Objects/coin_gold.png" id="1_j6sfx"]
+[ext_resource type="Script" uid="uid://bf685iv6c654d" path="res://Scripts/Coin2D.gd" id="1_oufci"]
+[ext_resource type="AudioStream" uid="uid://t0iusj3ntuay" path="res://Assets/MusicaYSonidosGodot/Sonidos/confirmation_002.ogg" id="3_0v8iq"]
+[ext_resource type="Texture2D" uid="uid://c6xmtxfi02rnl" path="res://Assets/Rocky Roads/FX/coin_collect.png" id="4_io3kk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oufci"]
+radius = 8.06226
+
+[sub_resource type="Animation" id="Animation_j6sfx"]
+resource_name = "Coin"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoinSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_oufci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoinSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CoinCollectSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CoinCollectSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0v8iq"]
+resource_name = "recolectado"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoinCollectSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CoinCollectSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.100409, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0v8iq"]
+_data = {
+&"Coin": SubResource("Animation_j6sfx"),
+&"RESET": SubResource("Animation_oufci"),
+&"recolectado": SubResource("Animation_0v8iq")
+}
+
+[node name="Coin" type="Node2D"]
+
+[node name="Coin2D" type="Area2D" parent="."]
+script = ExtResource("1_oufci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin2D"]
+shape = SubResource("CircleShape2D_oufci")
+
+[node name="CoinSprite2D" type="Sprite2D" parent="Coin2D"]
+texture_filter = 1
+texture = ExtResource("1_j6sfx")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Coin2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_0v8iq")
+}
+autoplay = "Coin"
+speed_scale = 0.6
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Coin2D"]
+stream = ExtResource("3_0v8iq")
+
+[node name="CoinCollectSprite2D" type="Sprite2D" parent="Coin2D"]
+visible = false
+texture = ExtResource("4_io3kk")
+hframes = 10
+
+[connection signal="body_entered" from="Coin2D" to="Coin2D" method="_on_body_entered"]

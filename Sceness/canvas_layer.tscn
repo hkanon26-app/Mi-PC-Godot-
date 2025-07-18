@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://doa1puo55nnhw"]
+
+[ext_resource type="Script" uid="uid://cl8x2gkgvqina" path="res://Scripts/UI.gd" id="1_cl51x"]
+[ext_resource type="PackedScene" uid="uid://ccg2kpw8yjkoq" path="res://Sceness/PauseMenu.tscn" id="2_8rnry"]
+[ext_resource type="Texture2D" uid="uid://bkkrvmeyujnu1" path="res://Assets/Rocky Roads/Objects/coin_small_gold.png" id="3_iugdd"]
+[ext_resource type="Texture2D" uid="uid://dy1it3dac4xpl" path="res://Assets/Rocky Roads/Objects/heart.png" id="4_whv5k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6itso"]
+bg_color = Color(1, 1, 1, 0.635294)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="CanvasLayer" type="CanvasLayer"]
+offset = Vector2(520, 520)
+scale = Vector2(6, 6)
+transform = Transform2D(6, 0, 0, 6, 520, 520)
+script = ExtResource("1_cl51x")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_8rnry")]
+process_mode = 3
+texture_filter = 1
+anchors_preset = -1
+anchor_left = -0.075
+anchor_top = -0.134
+anchor_right = 0.092
+anchor_bottom = 0.032
+offset_left = -0.599998
+offset_top = -0.167999
+offset_right = 0.0159912
+offset_bottom = 0.264
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -83.6667
+offset_top = -83.0
+offset_right = -53.6667
+offset_bottom = -70.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6itso")
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-77.6667, -77)
+scale = Vector2(0.625, 0.6875)
+texture = ExtResource("3_iugdd")
+hframes = 6
+
+[node name="Heart1" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-44, -77.6667)
+scale = Vector2(0.625, 0.6875)
+texture = ExtResource("4_whv5k")
+hframes = 3
+
+[node name="Heart2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-33.8333, -77.6667)
+scale = Vector2(0.625, 0.6875)
+texture = ExtResource("4_whv5k")
+hframes = 3
+
+[node name="Heart3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-23.6667, -77.6667)
+scale = Vector2(0.625, 0.6875)
+texture = ExtResource("4_whv5k")
+hframes = 3
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 2
+offset_left = -73.6667
+offset_top = -85.0
+offset_right = -33.6667
+offset_bottom = -62.0
+theme_override_font_sizes/font_size = 10
+text = ":"
+metadata/_edit_use_anchors_ = true
+
+[node name="CoinCollectedText" type="Label" parent="."]
+texture_filter = 1
+offset_left = -69.6667
+offset_top = -84.0
+offset_right = -59.6667
+offset_bottom = -61.0
+scale = Vector2(0.6, 0.6)
+theme_override_colors/font_color = Color(0, 0, 0, 0.713726)
+text = "0"
+metadata/_edit_use_anchors_ = true
