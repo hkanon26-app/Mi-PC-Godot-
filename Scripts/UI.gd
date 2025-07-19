@@ -9,6 +9,7 @@ var heart3
 
 func _ready():
 	
+	
 	heart1 = get_node("Heart1")
 	heart2 = get_node("Heart2")
 	heart3 = get_node("Heart3")

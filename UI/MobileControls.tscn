@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://horrwjey4do5"]
+
+[ext_resource type="Texture2D" uid="uid://bfer2lru65osf" path="res://Assets/Rocky Roads/UI/CirculoGris.png" id="1_cnggu"]
+[ext_resource type="Texture2D" uid="uid://bx45jmr71kqmm" path="res://Assets/Rocky Roads/UI/CirculoBlanco.png" id="2_6058b"]
+
+[node name="MobileControls" type="CanvasLayer"]
+layer = 100
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="JoystickBackground" type="TextureRect" parent="Control"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 0
+offset_left = 106.0
+offset_top = 407.0
+offset_right = 306.0
+offset_bottom = 607.0
+texture = ExtResource("1_cnggu")
+
+[node name="JoystickHandle" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 444.0
+offset_right = 343.0
+offset_bottom = 644.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_6058b")
+
+[node name="JumpButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 908.0
+offset_top = 421.0
+offset_right = 1058.0
+offset_bottom = 571.0
+text = "\"Saltar\""

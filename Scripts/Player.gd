@@ -1,17 +1,162 @@
 extends CharacterBody2D
 
-const moveSpeed = 25
-const maxSpeed = 50
-const jumpHeight = -300
-const gravity = 15
+# Configuración de movimiento
+const MOVE_SPEED = 250  # Velocidad base para todos los controles
+const JUMP_FORCE = -400
+const GRAVITY = 15
+const MAX_HORIZONTAL_SPEED = 200  # Límite de velocidad horizontal
+const JUMP_CUT_FACTOR = 0.5  # Reducción de salto al soltar
 
 @onready var sprite = $Sprite2D
 @onready var animationPlayer = $AnimationPlayer
+@onready var mobile_controls = $MobileControls
 
-#var motion = Vector2()
 var lifes = 3
+var is_jumping := false
+
+func _ready():
+	# Buscar controles móviles en la escena
+	var controls = get_tree().get_first_node_in_group("mobile_controls")
+	if controls:
+		mobile_controls = controls
+		mobile_controls.jump_pressed.connect(_on_mobile_jump)
+	
+	# Conectar señales para saltar en móvil
+	if mobile_controls:
+		mobile_controls.jump_pressed.connect(_on_mobile_jump)
 
 func _physics_process(_delta):
+	# 1. Aplicar gravedad
+	if not is_on_floor():
+		velocity.y += GRAVITY
+	
+	# 2. Obtener dirección de movimiento
+	var move_direction := Vector2.ZERO
+	
+	if mobile_controls and mobile_controls.is_dragging:
+		# Solo usamos el eje X para movimiento horizontal
+		move_direction.x = mobile_controls.get_movement_vector().x
+	else:
+		# Controles de teclado
+		move_direction.x = Input.get_axis("ui_left", "ui_right")
+	
+	# 3. Aplicar movimiento horizontal
+	velocity.x = move_direction.x * MOVE_SPEED
+	
+	# Limitar velocidad horizontal
+	velocity.x = clamp(velocity.x, -MAX_HORIZONTAL_SPEED, MAX_HORIZONTAL_SPEED)
+	
+	# 4. Manejar saltos
+	if is_on_floor():
+		is_jumping = false
+		if Input.is_action_just_pressed("ui_up"):
+			_perform_jump()
+	else:
+		# Reducir salto si se suelta el botón
+		if Input.is_action_just_released("ui_up") and velocity.y < JUMP_FORCE * JUMP_CUT_FACTOR:
+			velocity.y = JUMP_FORCE * JUMP_CUT_FACTOR
+	
+	# 5. Manejar animaciones
+	update_animations(move_direction)
+	
+	# 6. Mover el personaje
+	move_and_slide()
+
+func _perform_jump():
+	velocity.y = JUMP_FORCE
+	is_jumping = true
+	animationPlayer.play("Jump")
+
+func update_animations(direction: Vector2):
+	if not is_on_floor():
+		animationPlayer.play("Jump")
+	elif direction.x != 0:
+		sprite.flip_h = direction.x > 0
+		animationPlayer.play("Walk")
+	else:
+		animationPlayer.play("Idle")
+
+func _on_mobile_jump():
+	if is_on_floor():
+		_perform_jump()
+
+func add_Coin():
+	var canvasLayer = get_tree().get_root().find_child("CanvasLayer", true, false)
+	
+	if canvasLayer:
+		canvasLayer.handleCoinCollected()
+	else:
+		push_warning("CanvasLayer no encontrado para añadir moneda")
+
+func _loseLife(enemyposx):
+	# Aplicar knockback
+	if position.x < enemyposx: 
+		velocity.x = -200
+		velocity.y = -100
+	else: 
+		velocity.x = 200
+		velocity.y = -100
+	
+	move_and_slide()  # Aplicar el knockback inmediatamente
+	
+	lifes -= 1
+	print("Perdiste una vida, Vida actual= " + str(lifes))
+	
+	var canvasLayer = get_tree().get_root().find_child("CanvasLayer", true, false)
+	if canvasLayer:
+		canvasLayer.handleHearts(lifes)
+	
+	if lifes <= 0:
+		get_tree().reload_current_scene()
+
+func _on_spikes_body_entered(body: Node2D) -> void:
+	if body == self:
+		print("Hemos pinchado")
+		call_deferred("reiniciar_escena")
+
+func reiniciar_escena():
+	get_tree().change_scene_to_file("res://Sceness/Menu.tscn")
+		
+	
+		
+		
+	
+	
+
+
+
+
+
+"""extends CharacterBody2D
+
+#Configuracion de movimiento
+const MOVE_SPEED = 250  # Velocidad base (unificada para todos los controles)
+const JUMP_FORCE = -400
+const GRAVITY = 15
+const MAX_HORIZONTAL_SPEED = 200  # Límite de velocidad horizontal
+
+@onready var sprite = $Sprite2D
+@onready var animationPlayer = $AnimationPlayer
+@onready var mobile_controls = $MobileControls
+
+var lifes = 3
+var is_jumping := false
+
+func _physics_process(_delta):
+	
+	
+	var direction := Vector2.ZERO
+	
+	#Prioriza controles moviles si estan activos 
+	if mobile_controls.is_dragging:
+		direction = mobile_controls.get_movement_vector()
+	else:
+		# Mantén tus controles de teclado actuales para pruebas en PC
+		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		
+	velocity = direction * speed
+	move_and_slide()
+	
 	velocity.y += gravity
 	var friction = false
 
@@ -79,3 +224,4 @@ func _on_spikes_body_entered(body: Node2D) -> void:
 		
 func reiniciar_escena():
 	get_tree().change_scene_to_file("res://Sceness/Menu.tscn")
+"""
