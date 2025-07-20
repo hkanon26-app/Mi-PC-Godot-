@@ -17,6 +17,8 @@ signal jump_pressed
 var is_dragging := false
 var touch_index := -1
 var input_vector := Vector2.ZERO
+var jump_just_pressed = false
+var jump_just_released = false
 
 func _ready():
 	add_to_group("mobile_controls")
@@ -88,9 +90,19 @@ func _end_drag():
 	background.visible = false
 	handle.visible = false
 
-# API para obtener dirección
+"# API para obtener dirección
 func get_movement_vector() -> Vector2:
-	return input_vector
+	return input_vector"
 
 func _on_jump_pressed():
-	jump_pressed.emit()
+	jump_just_pressed = true
+	# Programar reset para el próximo frame
+	call_deferred("reset_jump_flags")
+	
+func reset_jump_flags():
+	jump_just_pressed = false
+	jump_just_released = false
+	
+func get_movement_vector() -> Vector2:
+	# Aplicar suavizado al vector
+	return input_vector.lerp(Vector2.ZERO, 0.2)

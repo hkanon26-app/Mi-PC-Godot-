@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
-# Configuración de movimiento
-const MOVE_SPEED = 250  # Velocidad base para todos los controles
-const JUMP_FORCE = -400
-const GRAVITY = 15
-const MAX_HORIZONTAL_SPEED = 200  # Límite de velocidad horizontal
-const JUMP_CUT_FACTOR = 0.5  # Reducción de salto al soltar
+# Configuración calibrada para movimiento natural
+const MOVE_SPEED = 120
+const JUMP_FORCE = -280
+const GRAVITY = 22
+const MAX_HORIZONTAL_SPEED = 150
+const ACCELERATION = 15
+const FRICTION = 20
 
 @onready var sprite = $Sprite2D
 @onready var animationPlayer = $AnimationPlayer
@@ -15,51 +16,49 @@ var lifes = 3
 var is_jumping := false
 
 func _ready():
-	# Buscar controles móviles en la escena
-	var controls = get_tree().get_first_node_in_group("mobile_controls")
-	if controls:
-		mobile_controls = controls
-		mobile_controls.jump_pressed.connect(_on_mobile_jump)
-	
-	# Conectar señales para saltar en móvil
 	if mobile_controls:
 		mobile_controls.jump_pressed.connect(_on_mobile_jump)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	# 1. Aplicar gravedad
 	if not is_on_floor():
 		velocity.y += GRAVITY
+	else:
+		is_jumping = false
 	
 	# 2. Obtener dirección de movimiento
 	var move_direction := Vector2.ZERO
 	
 	if mobile_controls and mobile_controls.is_dragging:
-		# Solo usamos el eje X para movimiento horizontal
-		move_direction.x = mobile_controls.get_movement_vector().x
+		# Suavizar la dirección del joystick
+		move_direction.x = lerp(move_direction.x, mobile_controls.get_movement_vector().x, 0.3)
 	else:
-		# Controles de teclado
 		move_direction.x = Input.get_axis("ui_left", "ui_right")
 	
-	# 3. Aplicar movimiento horizontal
-	velocity.x = move_direction.x * MOVE_SPEED
-	
-	# Limitar velocidad horizontal
-	velocity.x = clamp(velocity.x, -MAX_HORIZONTAL_SPEED, MAX_HORIZONTAL_SPEED)
+	# 3. Aplicar movimiento horizontal con aceleración
+	if move_direction.x != 0:
+		velocity.x = move_toward(velocity.x, move_direction.x * MOVE_SPEED, ACCELERATION)
+	else:
+		# Fricción cuando no hay input
+		velocity.x = move_toward(velocity.x, 0, FRICTION)
 	
 	# 4. Manejar saltos
 	if is_on_floor():
-		is_jumping = false
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_just_pressed("ui_up") or (mobile_controls and mobile_controls.jump_just_pressed):
 			_perform_jump()
+		if mobile_controls: 
+				mobile_controls.jump_just_pressed = false
 	else:
-		# Reducir salto si se suelta el botón
-		if Input.is_action_just_released("ui_up") and velocity.y < JUMP_FORCE * JUMP_CUT_FACTOR:
-			velocity.y = JUMP_FORCE * JUMP_CUT_FACTOR
+		# Reducir salto si se suelta el botón (salto corto)
+		if (Input.is_action_just_released("ui_up") or (mobile_controls and mobile_controls.jump_just_released)) and velocity.y < JUMP_FORCE/2:
+			velocity.y = JUMP_FORCE/2
+			if mobile_controls: 
+				mobile_controls.jump_just_released = false
 	
 	# 5. Manejar animaciones
 	update_animations(move_direction)
 	
-	# 6. Mover el personaje
+	# 6. Mover el personaje (SOLO UNA VEZ)
 	move_and_slide()
 
 func _perform_jump():
