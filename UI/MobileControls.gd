@@ -17,8 +17,6 @@ signal jump_pressed
 var is_dragging := false
 var touch_index := -1
 var input_vector := Vector2.ZERO
-var jump_just_pressed = false
-var jump_just_released = false
 
 func _ready():
 	add_to_group("mobile_controls")
@@ -29,17 +27,23 @@ func _ready():
 	handle.visible = false
 	
 	# Solo mostrar en dispositivos móviles
-	if OS.has_feature("mobile"):
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
 		visible = true
 		# Configurar botón de salto
 		jump_button.visible = true
 		jump_button.pressed.connect(_on_jump_pressed)
+		
+		# Configurar tamaños para diferentes pantallas (CORRECCIÓN)
+		var screen_size = get_viewport().get_visible_rect().size
+		max_radius = screen_size.x * 0.1
+		background.size = Vector2(max_radius * 2, max_radius * 2)
+		handle.size = Vector2(max_radius, max_radius)
 	else:
 		visible = false
 
 func _input(event):
 	# Solo procesar en móviles
-	if not OS.has_feature("mobile"):
+	if OS.get_name() != "Android" and OS.get_name() != "iOS":
 		return
 	
 	# Inicio de toque
@@ -90,19 +94,10 @@ func _end_drag():
 	background.visible = false
 	handle.visible = false
 
-"# API para obtener dirección
+# API para obtener dirección con suavizado
 func get_movement_vector() -> Vector2:
-	return input_vector"
+	return input_vector.lerp(Vector2.ZERO, 0.2)
 
 func _on_jump_pressed():
-	jump_just_pressed = true
-	# Programar reset para el próximo frame
-	call_deferred("reset_jump_flags")
-	
-func reset_jump_flags():
-	jump_just_pressed = false
-	jump_just_released = false
-	
-func get_movement_vector() -> Vector2:
-	# Aplicar suavizado al vector
-	return input_vector.lerp(Vector2.ZERO, 0.2)
+	# Emitir señal de salto
+	jump_pressed.emit()

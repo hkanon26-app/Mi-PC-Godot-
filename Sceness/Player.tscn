@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://d21up2416ooup"]
+[gd_scene load_steps=9 format=3 uid="uid://d21up2416ooup"]
 
 [ext_resource type="Script" uid="uid://bmwsyb2umdih2" path="res://Scripts/Player.gd" id="1_mxbdb"]
 [ext_resource type="Texture2D" uid="uid://cdubt3p3gyrkq" path="res://Assets/Rocky Roads/Enemies/slime_blue.png" id="1_qnbue"]
 
 [sub_resource type="Animation" id="Animation_x6bp5"]
 resource_name = "Idle"
+length = 6.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -12,10 +14,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 5, 0]
 }
 
 [sub_resource type="Animation" id="Animation_8v87t"]
@@ -35,7 +37,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ufa3c"]
 resource_name = "Walk"
-length = 1.5
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -44,15 +46,31 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.366667, 0.733333, 1.13333),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_mxbdb"]
+resource_name = "Jump"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 36, -0.223609, -30, 0.276391, 30, 20, -0.256942, -36, 0.243058, 28, 66, -0.256942, -36, 0.276391, 35, 118, -0.223609, -24, 0.376391, 28, 70, -0.223609, 62, 0.276391, -34, 11, -0.256943, 41, 0.243057, -59),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.8, 0.9, 1, 1.2, 1.8, 2)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2j6ax"]
 _data = {
 &"Idle": SubResource("Animation_x6bp5"),
+&"Jump": SubResource("Animation_mxbdb"),
 &"RESET": SubResource("Animation_8v87t"),
 &"Walk": SubResource("Animation_ufa3c")
 }

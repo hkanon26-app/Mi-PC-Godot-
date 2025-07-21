@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://n2mrxul4hfwh"]
+[gd_scene load_steps=12 format=3 uid="uid://n2mrxul4hfwh"]
 
 [ext_resource type="Texture2D" uid="uid://dg87ttke63wmy" path="res://Assets/Rocky Roads/Objects/coin_gold.png" id="1_j6sfx"]
 [ext_resource type="Script" uid="uid://bf685iv6c654d" path="res://Scripts/Coin2D.gd" id="1_oufci"]
 [ext_resource type="AudioStream" uid="uid://t0iusj3ntuay" path="res://Assets/MusicaYSonidosGodot/Sonidos/confirmation_002.ogg" id="3_0v8iq"]
 [ext_resource type="Texture2D" uid="uid://c6xmtxfi02rnl" path="res://Assets/Rocky Roads/FX/coin_collect.png" id="4_io3kk"]
+[ext_resource type="Texture2D" uid="uid://bsxy0r3njbbrf" path="res://Assets/Rocky Roads/FX/shine.png" id="5_wqt67"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oufci"]
 radius = 8.06226
@@ -62,9 +63,35 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CoinDespawnSprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_xte0y"]
+resource_name = "Desaparecer"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoinDespawnSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4)
+}
 
 [sub_resource type="Animation" id="Animation_0v8iq"]
-resource_name = "recolectado"
+resource_name = "Recolectado"
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -92,8 +119,9 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0v8iq"]
 _data = {
 &"Coin": SubResource("Animation_j6sfx"),
+&"Desaparecer": SubResource("Animation_xte0y"),
 &"RESET": SubResource("Animation_oufci"),
-&"recolectado": SubResource("Animation_0v8iq")
+&"Recolectado": SubResource("Animation_0v8iq")
 }
 
 [node name="Coin" type="Node2D"]
@@ -123,5 +151,9 @@ stream = ExtResource("3_0v8iq")
 visible = false
 texture = ExtResource("4_io3kk")
 hframes = 10
+
+[node name="CoinDespawnSprite2D" type="Sprite2D" parent="Coin2D"]
+texture = ExtResource("5_wqt67")
+hframes = 5
 
 [connection signal="body_entered" from="Coin2D" to="Coin2D" method="_on_body_entered"]

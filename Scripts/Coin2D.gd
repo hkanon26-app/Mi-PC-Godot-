@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var coin_sprite = $CoinSprite2D
 @onready var collect_sprite = $CoinCollectSprite2D
+@onready var despawn_sprite = $CoinDespawnSprite2D
 @onready var animation_player = $AnimationPlayer
 
 @export var tiempo_de_vida: float = 2.0
@@ -10,6 +11,9 @@ extends Area2D
 var recolectada: bool = false
 
 func _ready():
+	coin_sprite.visible = true
+	collect_sprite.visible = false
+	despawn_sprite.visible = false
 	_iniciar_autodestruccion()
 
 func _on_body_entered(body: Node2D):
@@ -18,13 +22,14 @@ func _on_body_entered(body: Node2D):
 		$AudioStreamPlayer.playing = true
 		body.add_Coin()
 		
+		# Ocultar sprite de moneda y mostrar animación de recolección
 		coin_sprite.visible = false
 		collect_sprite.visible = true
 		
 		set_deferred("monitoring", false)
 		set_deferred("collision_mask", 0)
 		
-		animation_player.play("recolectado")
+		animation_player.play("Recolectado")
 		
 		await animation_player.animation_finished
 		await get_tree().create_timer(0.1).timeout
@@ -40,7 +45,11 @@ func _iniciar_autodestruccion():
 	
 	print("⏳ Moneda no fue recolectada. Desapareciendo...")
 
+	# Ocultar sprite de moneda y mostrar sprite de desaparición
+	coin_sprite.visible = false
+	despawn_sprite.visible = true
+	
 	# Inicia animación de desaparición suave
-	animation_player.play("desaparecer")
+	animation_player.play("Desaparecer")
 	await get_tree().create_timer(tiempo_despawn_anim).timeout
 	queue_free()
